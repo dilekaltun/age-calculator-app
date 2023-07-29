@@ -1,5 +1,33 @@
 <template>
   <div id="app">
+    <notificationGroup group="error">
+      <div
+          class="fixed inset-0 flex px-4 py-6 pointer-events-none p-6 items-start justify-end"
+      >
+        <div class="max-w-sm w-full">
+          <notification v-slot="{notifications}">
+            <div
+                class="flex max-w-sm w-full mx-auto bg-white shadow-md rounded-lg overflow-hidden mt-4"
+                v-for="notification in notifications"
+                :key="notification.id"
+            >
+              <div class="flex justify-center items-center w-12 bg-red-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                  <path fill="#ffffff" d="M12 17q.425 0 .713-.288T13 16q0-.425-.288-.713T12 15q-.425 0-.713.288T11 16q0 .425.288.713T12 17Zm0-4q.425 0 .713-.288T13 12V8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8v4q0 .425.288.713T12 13Zm0 9q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z"/>
+                </svg>
+              </div>
+
+              <div class="-mx-3 py-2 px-4">
+                <div class="mx-3">
+                  <span class="text-red-500 font-semibold">{{notification.title}}</span>
+                  <p class="text-gray-600 text-sm">{{notification.text}}</p>
+                </div>
+              </div>
+            </div>
+          </notification>
+        </div>
+      </div>
+    </notificationGroup>
     <div class="bg-off-white flex flex-col w-2/5 h-auto p-10 rounded-3xl rounded-br-[130px]">
       <div>
         <a-form :form="form" class="mb-4 pb-5 flex justify-start gap-8 border-b-2 border-light-gray" @submit="handleSubmit">
@@ -43,13 +71,9 @@
             <a-input placeholder="YYYY"
                      v-decorator="['year', { rules:
                      [
-                         { required: true, message: 'This field is required' },
-                         {
-                            pattern: /^(19\d\d|20[01]\d|202[0-3])$/,
-                            message: 'Invalid value'
-                          },
-                          { min: 4},
-                          { max: 4}
+                       { required: true, message: 'This field is required' },
+                       { min: 4},
+                       { max: 4}
                      ] }]"
                      v-model="year"
                 class="bg-transparent text-off-black font-bold text-lg border border-light-gray rounded w-28 py-2
@@ -105,18 +129,22 @@ export default {
         if (!err) {
           const birthDate = new Date(this.year +'-'+ this.month +'-'+ this.day);
           const now = new Date();
+          if(now < birthDate) {
+            this.$notify(
+                { group: "error", title: "Error", text: "Can't be bigger than the current year!" },
+                2000
+            );
+            this.clearInput()
 
+            return;
+          }
           const diffDate =  new Date(now - birthDate);
 
           this.calculate.days = diffDate.getDate();
           this.calculate.months = diffDate.getMonth() + 1;
           this.calculate.years = diffDate.getFullYear() - 1970;
 
-          this.form.setFieldsValue({
-            day: null,
-            month: null,
-            year: null,
-          });
+          this.clearInput()
         } else {
             this.calculate.days = null
             this.calculate.months = null
@@ -124,6 +152,13 @@ export default {
         }
       });
     },
+    clearInput() {
+      this.form.setFieldsValue({
+        day: null,
+        month: null,
+        year: null,
+      });
+    }
   }
 }
 </script>

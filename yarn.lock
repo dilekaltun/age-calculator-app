@@ -6144,6 +6144,11 @@ vary@~1.1.2:
   resolved "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
 
+vt-notifications@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/vt-notifications/-/vt-notifications-0.4.1.tgz#0246b42254f9654157d0d1c060e2644411e80e11"
+  integrity sha512-dWa2E7BTVxbKzXDe9o2mCtj9Sz4+9xs3XsK4AQJq45vPlvkKfM1NR+C1m/JztypgMd7hRqqkHItsYygdrYJxwA==
+
 vue-cli-plugin-tailwind@~3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/vue-cli-plugin-tailwind/-/vue-cli-plugin-tailwind-3.0.0.tgz"
