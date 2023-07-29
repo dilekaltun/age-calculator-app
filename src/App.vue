@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <notificationGroup group="error">
-      <div
-          class="fixed inset-0 flex px-4 py-6 pointer-events-none p-6 items-start justify-end"
-      >
+      <div class="fixed inset-0 flex px-4 py-6 pointer-events-none p-6 items-start justify-end">
         <div class="max-w-sm w-full">
           <notification v-slot="{notifications}">
             <div
@@ -28,9 +26,9 @@
         </div>
       </div>
     </notificationGroup>
-    <div class="bg-off-white flex flex-col w-2/5 h-auto p-10 rounded-3xl rounded-br-[130px]">
+    <div class="bg-off-white flex flex-col w-[600px] m-5 h-auto p-10 rounded-3xl rounded-br-[130px]">
       <div>
-        <a-form :form="form" class="mb-4 pb-5 flex justify-start gap-8 border-b-2 border-light-gray" @submit="handleSubmit">
+        <a-form :form="form" class="mb-4 pb-5 flex flex-col md:flex-row justify-start gap-8 border-b-2 border-light-gray" @submit="handleSubmit">
           <a-form-item label="DAY" :colon="false" class="block text-smokey-grey text-[10px] tracking-widest font-bold mb-2 text-start">
             <a-input placeholder="DD"
                      v-model="day"
@@ -47,7 +45,7 @@
                           },
 
                        ]}]"
-                     class="bg-transparent text-off-black font-bold text-lg border border-light-gray rounded w-28 py-2
+                     class="bg-transparent text-off-black font-bold text-lg border border-light-gray rounded md:w-28 w-full py-2
                 px-3 focus:outline-none placeholder:text-smokey-grey placeholder:font-extrabold uppercase focus:border-off-purple">
             </a-input>
           </a-form-item>
@@ -62,7 +60,7 @@
                           },
                      ] }]"
                      v-model="month"
-                class="bg-transparent text-off-black font-bold text-lg border border-light-gray rounded w-28 py-2
+                class="bg-transparent text-off-black font-bold text-lg border border-light-gray rounded md:w-28 w-full py-2
                 px-3 focus:outline-none placeholder:text-smokey-grey placeholder:font-extrabold uppercase focus:border-off-purple">
 
             </a-input>
@@ -76,12 +74,12 @@
                        { max: 4}
                      ] }]"
                      v-model="year"
-                class="bg-transparent text-off-black font-bold text-lg border border-light-gray rounded w-28 py-2
+                class="bg-transparent text-off-black font-bold text-lg border border-light-gray rounded md:w-28 w-full py-2
                 px-3 focus:outline-none placeholder:text-smokey-grey placeholder:font-extrabold uppercase focus:border-off-purple">
             </a-input>
           </a-form-item>
           <a-form-item class="inline-flex items-center justify-end w-full">
-            <a-button html-type="submit" class="absolute p-4 mt-6 -ml-14 rounded-full  font-medium text-gray-900 bg-off-purple hover:bg-off-black hover:cursor-pointer">
+            <a-button html-type="submit" class="absolute p-4 md:mt-6 -mt-2 -ml-14 rounded-full  font-medium text-gray-900 bg-off-purple hover:bg-off-black hover:cursor-pointer">
               <img src="./assets/images/icon-arrow.svg" class="w-7 h-7" alt="arrow-icon">
             </a-button>
           </a-form-item>
